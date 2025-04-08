@@ -4,8 +4,8 @@ import { Booking } from "../models/booking.model.js";
 const bookService = async (req, res) => {
     try {
         const userId = req.user.id
-        const {fullname, email, phoneno, bookon, adult, child, status } = req.body;
-        const newBooking = new Booking({ userId, fullname, email, phoneno, bookon, adult, child, status});
+        const {place_order, fullname, email, phoneno, bookon, adult, child, status } = req.body;
+        const newBooking = new Booking({ userId, place_order, fullname, email, phoneno, bookon, adult, child, status});
         await newBooking.save();
         res.status(201).json({ message: 'Booking successful', booking: newBooking });
     } catch (error) {
