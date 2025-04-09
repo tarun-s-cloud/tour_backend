@@ -1,4 +1,3 @@
-// import express from "express";
 import { Booking } from "../models/booking.model.js";
 // Create a new booking
 const bookService = async (req, res) => {
