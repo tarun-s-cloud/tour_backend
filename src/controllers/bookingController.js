@@ -12,18 +12,17 @@ const bookService = async (req, res) => {
     }
 }
 
-// Get user bookings
-const updateBookingStatus = async (req, res) => {
+const getBooking = async (req, res) => {
     try {
-        const bookings = await Booking.find({ userId: req.params.userId });
-         console.log("User ID:", req.params.userId);
-        console.log(bookings);
-        
-        res.json(bookings);
+        const userId = req.user.id;
+        const bookings = await Booking.find({ userId });
+        res.status(200).json({ bookings });
     } catch (error) {
         res.status(500).json({ error: 'Server error' });
     }
-}
+};
+
+
 
 // Cancel a booking
 const cancelBooking = async (req, res) => {
@@ -38,5 +37,5 @@ const cancelBooking = async (req, res) => {
 export{
     bookService,
     cancelBooking,
-    updateBookingStatus
+    getBooking
 }
