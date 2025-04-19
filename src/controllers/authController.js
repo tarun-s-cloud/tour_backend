@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 const register = async (req, res) => {
   try {
-    const { username, email, password, order} = req.body;
+    const { username, email, password,order} = req.body;
     if (!username || !email || !password) return res.status(400).json({ error: 'All fields are required' });
     
     const existingUser = await User.findOne({ email });
@@ -61,14 +61,9 @@ const updateProfile = async (req, res) => {
   }
 };
 
-const logout = (req, res) => {
-  res.json({ message: 'Logged out successfully' });
-};
-
 export{
   register,
   login,
   getProfile,
   updateProfile,
-  logout
 }
