@@ -4,7 +4,7 @@ import {authenticateUser} from '../middleware/bookingMiddleware.js'
 const router = express.Router();
 
 router.post('/book',authenticateUser, bookService);
-router.delete('/booking/:id', authenticateUser, cancelBooking);
+router.delete('/cancel/:id', authenticateUser, cancelBooking);
 router.get('/profile', authenticateUser, getBooking);
 
 export default router

@@ -14,7 +14,7 @@ export const auth = (req, res, next) => {
     req.user = verified; // Attach user payload to req
     next();
   } catch (error) {
-    res.status(403).json({ error: "Invalid token" }); // Use 403 for invalid token
+    res.status(403).json({ error: "Invalid " }); // Use 403 for invalid token
   }
 };
 
