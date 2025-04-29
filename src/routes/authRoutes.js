@@ -4,7 +4,7 @@ import {auth} from'../middleware/authMiddleware.js'
 const router = express.Router();
 
 router.post('/register', register);
-router.post('/login',auth , login)
+router.post('/login', login)
 router.get('/profile', auth, getProfile);
 router.put('/update', auth, updateProfile);
 
