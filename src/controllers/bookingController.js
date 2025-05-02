@@ -22,19 +22,55 @@ const getBooking = async (req, res) => {
 };
 
 
+const updateBooking = async (req, res) => {
+  try {
+    const bookingId = req.params.id;
+    const userId = req.user.id;
 
-// Cancel a booking
+    const booking = await Booking.findById(bookingId);
+
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    if (booking.userId.toString() !== userId) {
+      return res.status(403).json({ error: "Not authorized to update this booking" });
+    }
+
+    // Only update the allowed fields
+    const { bookon, adult, child } = req.body;
+
+    if (bookon) booking.bookon = bookon;
+    if (adult !== undefined) booking.adult = adult;
+    if (child !== undefined) booking.child = child;
+
+    await booking.save();
+
+    res.status(200).json({ message: "Booking updated", booking });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+
+
 const cancelBooking = async (req, res) => {
     try {
-        await Booking.findByIdAndDelete(req.params.id);
+        const booking = await Booking.findByIdAndDelete(req.params.id);
+        if (!booking) {
+            return res.status(404).json({ error: 'Booking not found' });
+        }
         res.json({ message: 'Booking canceled' });
     } catch (error) {
         res.status(500).json({ error: 'Server error' });
     }
-}
+};
+
 
 export{
     bookService,
     cancelBooking,
-    getBooking
+    getBooking,
+    updateBooking
 }

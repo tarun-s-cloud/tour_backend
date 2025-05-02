@@ -14,7 +14,7 @@ const BookingSchema = new mongoose.Schema({
   adult:{type:Number},
   child:{type:Number,
   },
-  status: { type: String, enum: ['pending', 'confirmed', 'cancelled'], default: 'pending' }
+  status: { type: String, enum: ['pending', 'confirmed', 'cancelled', 'completed'], default: 'pending' }
 }, { timestamps: true });
 
 export const Booking = mongoose.model("Booking", BookingSchema)
