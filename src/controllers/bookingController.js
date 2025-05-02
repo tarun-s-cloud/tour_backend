@@ -48,6 +48,36 @@ const updateBooking = async (req, res) => {
   }
 };
 
+const updateBookingStatus = async (req, res) => {
+  try {
+    const bookingId = req.params.id;
+    const { status } = req.body;
+
+    if (!status) {
+      return res.status(400).json({ error: "Status is required" });
+    }
+
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      bookingId,
+      { status },
+      { new: true }
+    );
+
+    if (!updatedBooking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    res.status(200).json({
+      message: "Booking status updated successfully",
+      booking: updatedBooking,
+    });
+  } catch (error) {
+    console.error("Error updating status:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+
 const cancelBooking = async (req, res) => {
     try {
         const booking = await Booking.findByIdAndDelete(req.params.id);
@@ -65,5 +95,6 @@ export{
     bookService,
     cancelBooking,
     getBooking,
-    updateBooking
+    updateBooking,
+    updateBookingStatus
 }
