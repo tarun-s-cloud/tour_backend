@@ -34,7 +34,6 @@ app.use(cookieParser())
 
 app.use('/user', authRoutes);
 app.use('/booking', bookingRoutes);
-app.use('/api/users', authRoutes);
 
 app.use(errorHandler);
 app.get("/",(req,res) => {

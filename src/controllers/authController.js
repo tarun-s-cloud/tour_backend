@@ -51,14 +51,6 @@ const getProfile = async (req, res) => {
   }
 };
 
-const getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find().select('-password'); // exclude password
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching users' });
-  }
-}
 
 const updateProfile = async (req, res) => {
   try {
@@ -75,5 +67,4 @@ export{
   login,
   getProfile,
   updateProfile,
-  getAllUsers
 }
